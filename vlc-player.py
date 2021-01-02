@@ -18,7 +18,7 @@ except FileNotFoundError:
 
 def calc_time():
     current_time = datetime.datetime.now  # Current Time for difference
-    target_time = datetime.datetime(2020, 12, 31, hour, minute, second)
+    target_time = datetime.datetime(2021, 1, 1, hour, minute, second)
 
     return (target_time - current_time()).total_seconds()
 
@@ -33,8 +33,7 @@ if not file:
 media = vlc.MediaPlayer(file)
 
 # Party Time
-hour, minute, second = 20, 15, 0
-
+hour, minute, second = 0, 10, 0
 media.play()
 media.set_pause(True)
 # Seek to a time (MS)
@@ -46,7 +45,9 @@ try:
     time.sleep(calc_time())
 except ValueError:
     hour, minute = list(map(int, input('Enter a time in future: HH:MM (24-Hour):\n').strip().split(':')))
+    print(f"Pausing for {round(calc_time())} seconds..")
     time.sleep(calc_time())
+
 
 # Video length in seconds
 video_length = media.get_length() / 1000
@@ -60,12 +61,12 @@ media.set_fullscreen(True)
 media.play()
 time.sleep(video_length)
 
-# Pause for 10 Minutes
+# Pause for 12 Minutes
 media.set_pause(True)
-time.sleep(20)
+time.sleep(720)
 
 # Play Again
 media.play()
 time.sleep(video_length)
 # media.close()
-input("Goodbye!! Press any key to exit ")
+input("Goodbye!! Press any key to exit.. ")
